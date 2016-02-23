@@ -1,5 +1,5 @@
 lazy val root = (project in file("."))
-.enablePlugins(PlayScala)
+.enablePlugins(PlayScala, sbtdocker.DockerPlugin)
 .settings(
   scalaVersion := "2.11.7",
   scalacOptions := Seq("-language:_", "-deprecation", "-unchecked", "-feature", "-Xlint"),
@@ -19,5 +19,17 @@ lazy val root = (project in file("."))
     "com.nulab-inc" %% "play2-oauth2-provider" % "0.16.1"
   )
 )
+
+dockerfile in docker := {
+  val appDir = stage.value
+  val targetDir = "/app"
+
+  new Dockerfile {
+    from("java")
+    entryPoint(s"$targetDir/bin/${executableScriptName.value}")
+    copy(appDir, targetDir)
+  }
+}
+
 
 routesGenerator := InjectedRoutesGenerator

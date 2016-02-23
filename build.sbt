@@ -31,5 +31,8 @@ dockerfile in docker := {
   }
 }
 
+imageNames in docker := Seq(
+  ImageName("letusfly85/play-sample-auth:latest")
+)
 
 routesGenerator := InjectedRoutesGenerator

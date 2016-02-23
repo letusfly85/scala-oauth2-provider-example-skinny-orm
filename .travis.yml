@@ -7,4 +7,4 @@ services:
 
 script:
   - sbt clean compile
-  - sbt docker:publish
+  - sbt dockerBuildAndPush

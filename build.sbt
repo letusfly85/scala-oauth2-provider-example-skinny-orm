@@ -3,6 +3,7 @@ lazy val root = (project in file("."))
 .settings(
   scalaVersion := "2.11.7",
   scalacOptions := Seq("-language:_", "-deprecation", "-unchecked", "-feature", "-Xlint"),
+  javaOptions := Seq("-Dplay.evolutions.db.default.autoApply=true"),
   transitiveClassifiers in Global := Seq(Artifact.SourceClassifier),
   sources in (Compile, doc) := Nil,
   publishArtifact in (Compile, packageDoc) := false,
